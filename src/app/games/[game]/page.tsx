@@ -28,10 +28,9 @@ const GamePage: NextPage<{ params: Params }> = ({ params }) => {
 
   return (
     <div>
-      <h1>Game: {game}</h1>
       <div
         dangerouslySetInnerHTML={{ __html: htmlContent }}
-        style={{ width: "100%", height: "500px" }} // Adjust height as needed
+        style={{ width: "100%" }} // Adjust height as needed
       />
     </div>
   );
