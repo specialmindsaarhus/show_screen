@@ -3,7 +3,7 @@ import path from "path";
 import { FC } from "react";
 
 interface GamePageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ game: string }>;
 }
 
 const GamePage: FC<GamePageProps> = async ({ params }) => {
