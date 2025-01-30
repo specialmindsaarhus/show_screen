@@ -4,10 +4,11 @@
 import GameCard from "./GameCard";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { type } from "os";
 
 const GameContainer = () => {
   //const games = getGames();
-  const games = ["Mario", "pasta", "thor"];
+  const games = ["GreenKnight", "Mario", "pasta", "thor"];
   console.log("games: ", games);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,7 +23,7 @@ const GameContainer = () => {
 
   //temp array for building / dev:
 
-  let carouselActive: boolean = true;
+  let carouselActive = true;
 
   return (
     <div
