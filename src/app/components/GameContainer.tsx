@@ -23,7 +23,7 @@ const GameContainer = () => {
 
   //temp array for building / dev:
 
-  let carouselActive = true;
+  //let carouselActive = true;
 
   return (
     <div

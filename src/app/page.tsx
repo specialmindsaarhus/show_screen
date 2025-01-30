@@ -1,4 +1,3 @@
-import Link from "next/link";
 import GameContainer from "./components/GameContainer";
 
 export default function HomePage() {
