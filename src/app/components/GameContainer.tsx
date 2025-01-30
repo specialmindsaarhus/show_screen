@@ -5,10 +5,10 @@ const GameContainer = () => {
   console.log("Games from get: ", games);
   return (
     <div>
+      <h2>Game Container</h2>
       <ul>
         {games.map((game) => (
           <li key={game}>
-            <h2>Inside Container</h2>
             <a
               href={`/games/${game}`}
               target="_blank"
