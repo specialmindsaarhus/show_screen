@@ -6,7 +6,7 @@ interface Params {
   game: string; // Type for dynamic route parameter
 }
 
-const GamePage: NextPage<{ params: Params }> = async ({ params }) => {
+const GamePage = async (params: Params) => {
   const { game } = await params; // Access dynamic route parameter 'game'
 
   // Path to the HTML file in the public/games directory
