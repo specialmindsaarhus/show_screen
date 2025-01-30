@@ -1,14 +1,15 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
+import { FC } from "react";
 
-interface Params {
-  game: string; // Type for dynamic route parameter
+interface GamePageProps {
+  params: { game: string };
 }
 
-const GamePage = async (params: Params) => {
-  const { game } = params; // Access dynamic route parameter 'game'
+const GamePage: FC<GamePageProps> = async ({ params }) => {
+  // Sikrer at params er defineret
+  const { game } = await params;
 
-  // Path to the HTML file in the public/games directory
   const gamePath = path.join(
     process.cwd(),
     "public",
@@ -17,22 +18,31 @@ const GamePage = async (params: Params) => {
     "index.html",
   );
 
-  // Read the HTML content if the file exists
-  let htmlContent = "";
-  if (fs.existsSync(gamePath)) {
-    htmlContent = fs.readFileSync(gamePath, "utf-8");
-  } else {
+  try {
+    const htmlContent = await fs.readFile(gamePath, "utf-8");
+
+    return (
+      <div>
+        <div
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          style={{ width: "100%" }}
+        />
+      </div>
+    );
+  } catch (error) {
     return <div>Game not found</div>;
   }
-
-  return (
-    <div>
-      <div
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-        style={{ width: "100%" }} // Adjust height as needed
-      />
-    </div>
-  );
 };
+
+// Gør Next.js opmærksom på, hvilke routes der findes
+export async function generateStaticParams() {
+  const gamesDir = path.join(process.cwd(), "public", "games");
+  try {
+    const gameFolders = await fs.readdir(gamesDir);
+    return gameFolders.map((game) => ({ game }));
+  } catch {
+    return [];
+  }
+}
 
 export default GamePage;
